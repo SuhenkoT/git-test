@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+        <style>
+            #myTable
+            {
+                border-collapse: collapse;
+            }
+            #myTable td
+            {
+                width: 35px;
+                border:1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        
+        
+        <script>
+                       
+            var letters = ["А","Б","В","Г","Д","Е","Ё","Ж","З","И","Й","К","Л","М","Н","О","П","Р","С","Т","У","Ф","Х","Ц","Ч","Ш","Щ","Ъ","Ы","Ь","Э","Ю","Я"];
+            var colors = ["red","green","blue","yellow","gray","pink"];
+            
+            var n = prompt("Введите количество строк:");
+            var m = prompt("Введите количество столбцов:");
+            n=+n;
+            m=+m;
+             var myTable = document.createElement('table');
+             document.body.appendChild(myTable); 
+             myTable.setAttribute("id","myTable");
+            for(var i = 0; i<=n-1; i=i+1)
+            {       
+               
+                var newRow = myTable.insertRow(i);
+                for(var j = 0; j<=m-1; j = j+1)
+                {
+                   var letterIndex = getRandomInt(0,letters.length-1);
+                   var letter = letters[letterIndex];
+                   
+                   var colorIndex = getRandomInt(0,colors.length-1); 
+                   var color = colors[colorIndex];
+                   
+                   var newCell = newRow.insertCell(j);
+                   newCell.innerHTML = letter;
+                   newCell.style.backgroundColor = color;
+                }
+            }
+            
+            
+             function getRandomInt(min, max)
+            {
+             return Math.floor(Math.random() * (max - min + 1)) + min;
+            } 
+            
+        </script>
+    </body>
+    
+</html>

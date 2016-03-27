@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <style>
+            #myTable
+            {
+                border-collapse: collapse;
+                margin: 0 auto;
+                cursor: pointer;
+            }
+            #myTable td
+            {
+                width: 50px;
+                height: 50px;
+                border:2px solid black;
+            }
+            .blackCell
+            {
+                background-color: black;
+            }
+            
+           #myTable td.selected
+            {
+                background-color: red;
+                
+            }
+        </style>
+    <body>
+        
+        <div>
+            <span>Выбрана клетка </span> <span id="selectedCell"></span>
+        </div>
+        <br>
+      <script>
+        var currentCell;
+        var currentCellElement;
+        function createTable(n,m)
+        {
+            
+            
+         var myTable = document.createElement('table');
+             document.body.appendChild(myTable); 
+             myTable.setAttribute("id","myTable");
+             
+             
+             
+            for(var i = 0; i<=n-1; i=i+1)
+            {       
+               
+                var newRow = myTable.insertRow(i);
+                for(var j = 0; j<=m-1; j = j+1)
+                {       
+                   var newCell = newRow.insertCell(j);
+
+                    if( (i+j) % 2 == 0 )
+                    {
+                        newCell.setAttribute("class","blackCell");
+                    }
+                   
+                }
+            }
+            
+            var letters = ["A","B","C","D","E","F","G","H"];
+            
+            myTable.onclick = function(event) {
+                var target = event.target; 
+                console.log(target.tagName);
+                if (target.tagName != 'TD') return;           
+                if(currentCellElement)
+                {
+                    currentCellElement.setAttribute("class","");
+                    
+                    var i = currentCellElement.cellIndex;
+                    var j = currentCellElement.parentElement.rowIndex;
+                     if( (i+j) % 2 == 0 )
+                    {
+                        currentCellElement.setAttribute("class","blackCell");
+                    }
+                }
+               currentCellElement = target;
+                currentCellElement.setAttribute("class","selected");
+                
+                    currentCell = letters[target.cellIndex+1]+(target.parentElement.rowIndex+1);
+                    document.getElementById("selectedCell").innerHTML = currentCell;
+                };    
+        }
+          
+          
+          createTable(8,8);
+      </script>  
+        
+    </body>
+    
+    
+    
+</html>
